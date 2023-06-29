@@ -16,10 +16,10 @@ Book Store Web Application
 **Frontend and App to run in local:**
 Open Terminal and cd to frontend
 $ npm install
+//if receive any package error install that package saperately. for eg. npm install axios. 
 $ npm start
 
 **Backend Code:**
 Open Terminal and cd to Backend
 $ npm install
-$ npm start
     
