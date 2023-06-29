@@ -11,7 +11,7 @@ Book Store Web Application
 # BE Tools Used
 - Build with `Nodejs`, `AWS Lambda`, `DynamoDB`, `API Gateway`, `IAM service`
 
-**How to Run**
+# How to Run**
 
 **Frontend and App to run in local:**
 Open Terminal and cd to frontend
