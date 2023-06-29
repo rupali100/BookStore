@@ -18,8 +18,12 @@ Open Terminal and cd to frontend
 $ npm install
 //if receive any package error install that package saperately. for eg. npm install axios. 
 $ npm start
+for Unit test
+$ npm test
 
 **Backend Code:**
 Open Terminal and cd to Backend
 $ npm install
+for Unit Test
+$ npm start
     
