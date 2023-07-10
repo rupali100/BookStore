@@ -23,10 +23,10 @@ const Products = ({ products, onAddToCart }) => {
           <img src={logo1} alt=" slide" />
           <Carousel.Caption>
             <Button
-              className={classes.but}
+              className={classes.button}
               size="large"
               variant="contained"
-              color="default"
+              color="secondary"
               href="#pro"
             >
               Explore
@@ -37,7 +37,7 @@ const Products = ({ products, onAddToCart }) => {
           <img className="d-block w-100" src={logo3} alt="Second slide" />
           <Carousel.Caption>
             <Button
-              className={classes.but}
+              className={classes.button}
               size="large"
               variant="contained"
               color="secondary"
