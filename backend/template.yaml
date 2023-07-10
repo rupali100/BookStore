@@ -31,6 +31,7 @@ Resources:
   BOOKApi:
     Type: AWS::Serverless::Api
     Properties:
+      StageName: !Sub 'develop'
       GatewayResponses:
         DEFAULT_4XX:
           ResponseParameters:
@@ -106,118 +107,7 @@ Resources:
           Type: Api
           Properties:
             Path: /removeFromCart
-            Method: AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Description: >
-  BOOK-lambda
-
-Parameters:
-  account:
-    Type: String
-    Description: default
-  region:
-    Type: String
-    Description: default
-Globals:
-  Function:
-    Timeout: 30
-    Layers:
-      - !Ref NodeModulesLayer
-    Runtime: nodejs14.x
-
-Resources:
-  NodeModulesLayer:
-    Type: AWS::Serverless::LayerVersion
-    Properties:
-      LayerName: BOOK-dependencies
-      Description: Dependencies for BOOK  [node modules]
-      ContentUri: dependencies/
-      CompatibleRuntimes:
-        - nodejs14.x
-      RetentionPolicy: Retain
-
-  BOOKApi:
-    Type: AWS::Serverless::Api
-    Properties:
-      GatewayResponses:
-        DEFAULT_4XX:
-          ResponseParameters:
-            Headers:
-              Access-Control-Allow-Origin: "'*'"
-              Access-Control-Allow-Methods: "'*'"
-              Access-Control-Allow-Headers: "'*'"
-      Cors:
-        AllowHeaders: "'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization'"
-        AllowOrigin: "'*'"
-
-  GetCartDetails:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: scripts/getCartDetails
-      Handler: getCartDetails/app.getCartDetails
-      Role: !Sub 'arn:aws:iam::${account}:role/Glue-Lambda-Elasticache-CodePipeline-Role'
-      FunctionName: Book-GetCartDetails
-      MemorySize: 2048
-      Events:
-          :
-          Type: Api
-          Properties:
-            Path: /getCartDetails
-            Method: get
-            RestApiId:
-              Ref: BOOKApi
-
-  GetBookDetails:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: scripts/getBookDetails
-      Handler: getBookDetails/app.getBookDetails
-      Role: !Sub 'arn:aws:iam::${account}:role/Glue-Lambda-Elasticache-CodePipeline-Role'
-      FunctionName: Book-GetBookDetails
-      MemorySize: 2048
-      Events:
-          :
-          Type: Api
-          Properties:
-            Path: /getBookDetails
-            Method: get
-            RestApiId:
-              Ref: BOOKApi
-
-  AddToCart:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: scripts/addToCart
-      Handler: addToCart/app.addToCart
-      Role: !Sub 'arn:aws:iam::${account}:role/Glue-Lambda-Elasticache-CodePipeline-Role'
-      FunctionName: Book-AddToCart
-      MemorySize: 2048
-      Events:
-          :
-          Type: Api
-          Properties:
-            Path: /addToCart
-            Method: post
-            RestApiId:
-              Ref: BOOKApi 
-
-  RemoveFromCart:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: scripts/removeFromCart
-      Handler: removeFromCart/app.removeFromCart
-      Role: !Sub 'arn:aws:iam::${account}:role/Glue-Lambda-Elasticache-CodePipeline-Role'
-      FunctionName: Book-RemoveFromCart
-      MemorySize: 2048
-      Events:
-          :
-          Type: Api
-          Properties:
-            Path: /removeFromCart
-            Method: get
-            RestApiId:
-              Ref: BOOKApi                       
-  
+            Method: delete
             RestApiId:
               Ref: BOOKApi                       
   
