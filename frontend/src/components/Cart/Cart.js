@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import CartItem from "./CartItem/CartItem";
 import useStyles from "./styles";
 
-const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
+const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart }) => {
   const classes = useStyles();
 
   const renderEmptyCart = () => (
@@ -27,7 +27,6 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
           <Grid item xs={12} sm={2} key={lineItem.id}>
             <CartItem
               item={lineItem}
-              onUpdateCartQty={onUpdateCartQty}
               onRemoveFromCart={onRemoveFromCart}
             />
           </Grid>
@@ -35,7 +34,7 @@ const Cart = ({ cart, onUpdateCartQty, onRemoveFromCart, onEmptyCart }) => {
       </Grid>
       <div className={classes.cardDetails}>
         <Typography variant="h5">
-          Subtotal: <b>{cart.totalValue}</b>
+          Subtotal: <b> ${cart.totalValue}</b>
         </Typography>
         <div>
           <Button
