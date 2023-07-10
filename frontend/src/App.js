@@ -10,17 +10,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import axios from "axios";
 
 const App = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [cart, setCart] = useState({});
-  const [order, setOrder] = useState({});
-  const [errorMessage, setErrorMessage] = useState("");
   const [bookData, setBookData] = useState([]);
 
   const fetchBookData = async () => {
     try {
       const response = await axios.get(
         " https://8230hr9rdb.execute-api.ap-south-1.amazonaws.com/Dev/getbooksdetails"
-      ); // Replace with your API endpoint URL
+      );
       console.log("response", response);
       setBookData(response.data.Items);
       console.log("bookdata", bookData);
@@ -46,12 +43,6 @@ const App = () => {
     setCart(item.data);
   };
 
-  // const handleUpdateCartQty = async (lineItemId, quantity) => {
-  //   const response = await commerce.cart.update(lineItemId, { quantity });
-
-  //   setCart(response.cart);
-  // };
-
   const handleRemoveFromCart = async (lineItemId) => {
     console.log("lineItemId", lineItemId);
     const item = await axios.delete(
@@ -61,33 +52,6 @@ const App = () => {
     console.log("lineItemId", item);
     setCart(item);
   };
-
-  // const handleEmptyCart = async () => {
-  //   const response = await commerce.cart.empty();
-
-  //   setCart([]);
-  // };
-
-  // const refreshCart = async () => {
-  //   const newCart = await commerce.cart.refresh();
-
-  //   setCart(newCart);
-  // };
-
-  // const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
-  //   try {
-  //     const incomingOrder = await commerce.checkout.capture(
-  //       checkoutTokenId,
-  //       newOrder
-  //     );
-
-  //     setOrder(incomingOrder);
-
-  //     refreshCart();
-  //   } catch (error) {
-  //     setErrorMessage(error.data.error.message);
-  //   }
-  // };
 
   useEffect(() => {
     fetchBookData();
@@ -110,7 +74,6 @@ const App = () => {
             <Route exact path="/cart">
               <Cart cart={cart} onRemoveFromCart={handleRemoveFromCart} />
             </Route>
-            
           </Switch>
         </div>
       </Router>
